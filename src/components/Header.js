@@ -6,11 +6,11 @@ const Header = () => {
   return (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">
-        Streamy
+        2D Atlas
       </Link>
       <div className="right menu">
         <Link to="/" className="item">
-          All Streams
+          All Surveys
         </Link>
         <GoogleAuth />
       </div>

@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { fetchStreams } from '../../actions';
+import StreamsAccordions from './StreamsAccordion';
 
 class StreamList extends React.Component {
   componentDidMount() {
@@ -19,20 +21,51 @@ class StreamList extends React.Component {
     }
   }
 
+  // handleTitleClick = (e) => {
+  //   if (e.target.nextSibling.className === "active content") {
+  //     e.target.className = "title";
+  //     e.target.nextSibling.className = "content";
+  //   } else {
+  //     e.target.className = "active title";
+  //     e.target.nextSibling.className = "active content";
+  //   }
+  // }
+
   renderList() {
-    return this.props.streams.map(stream => {
-      return (
-        <div className="item" key={stream.id}>
-          {this.renderAdmin(stream)}
-          <i className="large middle aligned icon camera" />
-          <div className="content">
-            <Link to={`/streams/${stream.id}`} className="header">{stream.title}</Link>
-            <div className="description">{stream.description}</div>
-          </div>
-        </div>
-      );
-    })
+    console.log(this.props.streams);
+    return (
+      <StreamsAccordions />
+    );
+    // return this.props.streams.map(stream => {
+    //   return (
+    //     <div key={stream._id}>
+    //       <div className="title" onClick={this.handleTitleClick}>
+    //         <i className="dropdown icon"></i>
+    //         {stream.sig}
+    //       </div>
+    //       <div className="content" ref={this.contentRef}>
+    //         {stream.area}
+    //       </div>
+    //     </div>
+    //   );
+    // });
   }
+
+  // renderList() {
+  //   console.log(this.props.streams);
+  //   return this.props.streams.map(stream => {
+  //     return (
+  //       <div className="item" key={stream.id}>
+  //         {this.renderAdmin(stream)}
+  //         <i className="large middle aligned icon camera" />
+  //         <div className="content">
+  //           <Link to={`/streams/${stream.id}`} className="header">{stream.title}</Link>
+  //           <div className="description">{stream.description}</div>
+  //         </div>
+  //       </div>
+  //     );
+  //   })
+  // }
 
   renderCreate() {
     if (this.props.isSignedIn) {
@@ -45,10 +78,17 @@ class StreamList extends React.Component {
   }
 
   render() {
+    // return (
+    //   <div>
+    //     <h2>2D Surveys</h2>
+    //     <div className="ui styled fluid accordion">{this.renderList()}</div>
+    //     {this.renderCreate()}
+    //   </div>
+    // );
     return (
       <div>
-        <h2>Streams</h2>
-        <div className="ui celled list">{this.renderList()}</div>
+        <h2>2D Surveys</h2>
+        {this.renderList()}
         {this.renderCreate()}
       </div>
     );
