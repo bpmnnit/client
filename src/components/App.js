@@ -5,7 +5,8 @@ import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
-import Header from './Header';
+import StreamAppBar from './StreamAppBar';
+// import Header from './Header';
 import history from '../history';
 
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
     <div className="ui container">
       <Router history={history}>
         <div>
-          <Header />
+          {/* <Header /> */}
+          <StreamAppBar />
           <Switch>
             <Route path="/" exact component={StreamList} />
             <Route path="/streams/new" exact component={StreamCreate} />
