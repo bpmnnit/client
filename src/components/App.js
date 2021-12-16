@@ -5,8 +5,7 @@ import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
-import StreamAppBar from './StreamAppBar';
-import RegionCreate from './gs/RegionCreate';
+import Header from './Header';
 // import Header from './Header';
 import history from '../history';
 
@@ -15,12 +14,11 @@ const App = () => {
     <div className="ui container">
       <Router history={history}>
         <div>
-          {/* <Header /> */}
+          <Header />
           {/* <StreamAppBar /> */}
           <Switch>
             <Route path="/" exact component={StreamList} />
             <Route path="/streams/new" exact component={StreamCreate} />
-            <Route path="/gs/regions/new" exact component={RegionCreate} />
             <Route path="/streams/edit/:id" exact component={StreamEdit} />
             <Route path="/streams/delete/:id" exact component={StreamDelete} />
             <Route path="/streams/:id" exact component={StreamShow} />
