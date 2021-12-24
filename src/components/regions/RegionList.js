@@ -5,10 +5,10 @@ import { fetchRegions } from '../../actions';
 import history from '../../history';
 
 class RegionList extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
 
-    this.tableRef = React.createRef();
+    this.sortConfig = 'asc';
   }
   componentDidMount() {
     this.props.fetchRegions();
@@ -57,16 +57,26 @@ class RegionList extends React.Component {
     }
   }
 
+  sortTable = () => {
+    console.log(this.sortRef.current.lastChild.children);
+    const thHtml = this.sortRef.current.innerHTML.toLowerCase();
+
+    this.sortConfig = this.sortConfig === 'asc' ? 'desc' : 'asc';
+
+    console.log(this.props.regions);
+
+  }
+
   render() {
     return (
       <div className='region-table-wrapper'>
         <h3>Regions</h3>
         {this.renderCreate()}
-        <table className='ui sortable compact selectable table' ref={this.tableRef}>
+        <table className='ui sortable compact selectable table'>
           <thead>
             <tr>
-              <th className='ascending'>Name</th>
-              <th className='ascending'>Description</th>
+              <th onClick={this.sortTable} ref={this.sortRef}>Title<i className={ this.sortConfig === 'asc' ? 'caret up icon' : 'caret down icon'}></i></th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
