@@ -1,32 +1,88 @@
-import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import StreamCreate from './streams/StreamCreate';
-import StreamDelete from './streams/StreamDelete';
-import StreamEdit from './streams/StreamEdit';
-import StreamList from './streams/StreamList';
-import StreamShow from './streams/StreamShow';
-import Header from './Header';
-// import Header from './Header';
-import history from '../history';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Router, Switch, Route } from "react-router-dom";
 
-const App = () => {
-  return (
-    <div className="ui container">
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import Login from './user/Login';
+import Register from './user/Register';
+import BoardHome from './board/BoardHome';
+import Profile from './user/Profile';
+import BoardUser from './board/BoardUser';
+import BoardModerator from './board/BoardModerator';
+import BoardAdmin from './board/BoardAdmin';
+import RegionCreate from './regions/RegionCreate';
+import RegionList from './regions/RegionList';
+
+import { logout } from "../actions/auth";
+import { clearMessage } from "../actions/message";
+
+import history from '../history';
+import Header from "./Header";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+    };
+
+    history.listen((location) => {
+      props.dispatch(clearMessage()); // clear message when changing location
+    });
+  }
+
+  componentDidMount() {
+    const user = this.props.user;
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+      });
+    }
+  }
+
+  logOut() {
+    this.props.dispatch(logout());
+    window.location.reload();
+  }
+
+  render() {
+    const { currentUser } = this.state;
+
+    return (
       <Router history={history}>
         <div>
-          <Header />
-          <Switch>
-            <Route path="/" exact component={StreamList} />
-            <Route path="/streams" exact component={StreamList} />
-            <Route path="/streams/new" exact component={StreamCreate} />
-            <Route path="/streams/edit/:id" exact component={StreamEdit} />
-            <Route path="/streams/delete/:id" exact component={StreamDelete} />
-            <Route path="/streams/:id" exact component={StreamShow} />
-          </Switch>
+          <Header currentUser={currentUser} logOut={this.logOut}/>
+          <div>
+            <Switch>
+              <Route exact path={["/", "/home"]} component={BoardHome} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/profile" component={Profile} />
+              <Route path="/user" component={BoardUser} />
+              <Route path="/mod" component={BoardModerator} />
+              <Route path="/admin" component={BoardAdmin} />
+              <Route path="/regions" exact component={RegionList} />
+              <Route path="/regions/new" exact component={RegionCreate} />
+            </Switch>
+          </div>
         </div>
       </Router>
-    </div>
-  );  
-};
+    );
+  }
+}
 
-export default App;
+function mapStateToProps(state) {
+  const { user } = state.auth;
+  return {
+    user,
+  };
+}
+
+export default connect(mapStateToProps)(App);

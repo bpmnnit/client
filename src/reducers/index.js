@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './authReducer';
+import regionsReducer from './regionsReducer';
 import streamsReducer from './streamsReducer';
+import messageReducer from './messageReducer';
 
 export default combineReducers({
   auth: authReducer,
+  message: messageReducer,
   form: formReducer,
-  streams: streamsReducer
+  streams: streamsReducer,
+  regions: regionsReducer
 });

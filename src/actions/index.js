@@ -1,4 +1,5 @@
 import streams from '../apis/streams';
+import gs from '../apis/gs';
 import history from '../history';
 import { 
   SIGN_IN,
@@ -8,6 +9,8 @@ import {
   FETCH_STREAM,
   EDIT_STREAM,
   DELETE_STREAM,
+  CREATE_REGION,
+  FETCH_REGIONS
 } from "./types";
 
 export const signIn = (userId) => {
@@ -31,10 +34,25 @@ export const createStream = formValues => async (dispatch, getState) => {
   history.push('/');
 };
 
+export const createRegion = formValues => async (dispatch, getState) => {
+  const userId = getState().auth.user.id;
+  const timeStamp = new Date();
+  const response = await gs.post('/regions/new', { ...formValues, userId, timeStamp });
+
+  dispatch({ type: CREATE_REGION, payload: response.data });
+  history.push('/regions');
+};
+
 export const fetchStreams = () => async dispatch => {
   const response = await streams.get('/streams');
 
   dispatch({ type: FETCH_STREAMS, payload: response.data });
+};
+
+export const fetchRegions = () => async dispatch => {
+  const response = await gs.get('/regions');
+
+  dispatch({ type: FETCH_REGIONS, payload: response.data });
 };
 
 export const fetchStream = (id) => async dispatch => {
