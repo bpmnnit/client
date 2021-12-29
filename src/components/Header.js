@@ -15,7 +15,7 @@ const Header = (props) => {
       <div className='ui pointing menu'>
         <Link to="/" className="item">
           <Logo />
-        </Link>
+        </Link> 
         <Link to="/regions" name='regions' className={activeItem === 'regions' ? 'active item' : 'item'} onClick={handleItemClick}>
           Regions
         </Link>

@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { fetchRegions } from '../../actions';
 import history from '../../history';
 
 class RegionList extends React.Component {
-  constructor(props){
-    super(props);
+  state = {
+    direction: '',
+    activeTh: null
+  };
 
-    this.sortConfig = 'asc';
-  }
   componentDidMount() {
     this.props.fetchRegions();
   }
@@ -34,15 +35,27 @@ class RegionList extends React.Component {
   }
 
   renderList() {
+    if (this.state.regions) {
+      return this.state.regions.map(region => {
+        return (
+          <tr key={region._id}>
+            <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
+            <td>{region.description}</td>  
+            <td>{this.renderAdmin(region)}</td>  
+          </tr>
+        );
+      });  
+    }
+
     return this.props.regions.map(region => {
       return (
         <tr key={region._id}>
-          <td><Link to={`/regions/${region.id}`} className="header">{region.title}</Link></td>
+          <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
           <td>{region.description}</td>  
           <td>{this.renderAdmin(region)}</td>  
         </tr>
       );
-    })
+    });
   }
 
   renderCreate() {
@@ -57,14 +70,23 @@ class RegionList extends React.Component {
     }
   }
 
-  sortTable = () => {
-    console.log(this.sortRef.current.lastChild.children);
-    const thHtml = this.sortRef.current.innerHTML.toLowerCase();
+  sortTable = (e) => {
+    const colname = e.target.attributes.colname.value;
+    this.setState({ activeTh: colname });
+    if (this.state.direction === '' || this.state.direction === 'descending') {
+      this.props.regions.sort((a, b) => a[colname] > b[colname] ? 1: -1);
+      this.setState({ direction: 'ascending' });
+    } else {
+      this.props.regions.sort((a, b) => a[colname] < b[colname] ? 1: -1);
+      this.setState({ direction: 'descending' });
+    }
+  }
 
-    this.sortConfig = this.sortConfig === 'asc' ? 'desc' : 'asc';
-
-    console.log(this.props.regions);
-
+  filterTable = (e) => {
+    const filterStr = e.target.value.toLowerCase();
+    this.setState({
+      regions: this.props.regions.filter(el => { return el.title.toLowerCase().includes(filterStr) || el.description.toLowerCase().includes(filterStr)})
+    });
   }
 
   render() {
@@ -72,11 +94,15 @@ class RegionList extends React.Component {
       <div className='region-table-wrapper'>
         <h3>Regions</h3>
         {this.renderCreate()}
-        <table className='ui sortable compact selectable table'>
+        <div className='ui icon input'>
+          <i className='search icon'></i>
+          <input type="text" placeholder="Search..." onChange={this.filterTable} />
+        </div>
+        <table className='ui celled sortable table'>
           <thead>
             <tr>
-              <th onClick={this.sortTable} ref={this.sortRef}>Title<i className={ this.sortConfig === 'asc' ? 'caret up icon' : 'caret down icon'}></i></th>
-              <th>Description</th>
+              <th className={ this.state.activeTh === 'title' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='title'>Title</th>
+              <th className={ this.state.activeTh === 'description' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='description'>Description</th>
               <th>Action</th>
             </tr>
           </thead>
