@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import _ from 'lodash';
 import { fetchRegions } from '../../actions';
 import history from '../../history';
+import Paginate from '../paginate/Paginate';
 
 class RegionList extends React.Component {
   state = {
@@ -110,6 +112,7 @@ class RegionList extends React.Component {
             {this.renderList()}
           </tbody>
         </table>
+        <Paginate page={this.props.page} size={this.props.size} totalRegions={this.props.totalRegions} />
       </div>
     );
   }
@@ -120,7 +123,14 @@ const mapStateToProps = (state) => {
     history.push('/login');
     window.location.reload();
   }
-  return { regions: Object.values(state.regions), currentUserId: state.auth.user.id, isSignedIn: state.auth.isLoggedIn };
+  return {
+    regions: Object.values(_.omit(state.regions, ['page', 'size', 'totalRegions'])),
+    currentUserId: state.auth.user.id,
+    isSignedIn: state.auth.isLoggedIn,
+    page: state.regions.page,
+    size: state.regions.size,
+    totalRegions: state.regions.totalRegions
+  };
 }
 
 export default connect(mapStateToProps, { fetchRegions })(RegionList);

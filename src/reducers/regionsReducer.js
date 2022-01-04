@@ -7,7 +7,13 @@ import {
 const regionsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_REGIONS:
-      return { ...state, ..._.mapKeys(action.payload, '_id')};
+      return { 
+        ...state,
+        page: action.payload.page,
+        size: action.payload.size,
+        totalRegions: action.payload.totalRegions,
+        ..._.mapKeys(action.payload.regions, '_id')
+      };
     case CREATE_REGION:
       return { ...state, [action.payload._id]: action.payload };
     default: 
