@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createRegion } from '../../actions';
+import { createRegion } from '../../actions/region.action';
 import RegionForm from './RegionForm';
 
 class RegionCreate extends React.Component {

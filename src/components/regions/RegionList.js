@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import _ from 'lodash';
-import { fetchRegions } from '../../actions';
+import { fetchRegions } from '../../actions/region.action';
 import history from '../../history';
 import Paginate from '../paginate/Paginate';
 
 class RegionList extends React.Component {
   state = {
     direction: '',
-    activeTh: null
+    activeTh: null,
+    page: 1,
+    size: 2,
   };
 
   componentDidMount() {
-    this.props.fetchRegions();
+    this.props.fetchRegions(this.state.page, this.state.size);
   }
 
   renderAdmin(region) {
@@ -91,6 +93,16 @@ class RegionList extends React.Component {
     });
   }
 
+  updatePage = (page, size) => {
+    console.log('PAGE: ' + page);
+    this.props.fetchRegions(page, size);
+  }
+
+  updatePageSize = (page, size) => {
+    console.log('SIZE: ' + size);
+    this.props.fetchRegions(page, size);
+  }
+
   render() {
     return (
       <div className='region-table-wrapper'>
@@ -112,7 +124,7 @@ class RegionList extends React.Component {
             {this.renderList()}
           </tbody>
         </table>
-        <Paginate page={this.props.page} size={this.props.size} totalRegions={this.props.totalRegions} />
+        <Paginate page={this.props.page} size={this.props.size} totalRegions={this.props.totalRegions} getPage={this.updatePage} setPageSize={this.updatePageSize}/>
       </div>
     );
   }

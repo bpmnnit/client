@@ -14,6 +14,8 @@ import BoardModerator from './board/BoardModerator';
 import BoardAdmin from './board/BoardAdmin';
 import RegionCreate from './regions/RegionCreate';
 import RegionList from './regions/RegionList';
+import RegionEdit from './regions/RegionEdit';
+import RegionView from './regions/RegionView';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
@@ -70,6 +72,8 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/regions" exact component={RegionList} />
               <Route path="/regions/new" exact component={RegionCreate} />
+              <Route path="/regions/edit/:_id" exact component={RegionEdit} />
+              <Route path="/regions/:_id" exact component={RegionView} />
             </Switch>
           </div>
         </div>

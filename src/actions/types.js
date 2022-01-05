@@ -8,6 +8,8 @@ export const EDIT_STREAM = 'EDIT_STREAM';
 
 export const CREATE_REGION = 'CREATE_REGION';
 export const FETCH_REGIONS = 'FETCH_REGIONS';
+export const FETCH_REGION = 'FETCH_REGION';
+export const EDIT_REGION = 'EDIT_REGION';
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
