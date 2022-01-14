@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Router, Switch, Route } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Login from './user/Login';
@@ -16,6 +15,7 @@ import RegionCreate from './regions/RegionCreate';
 import RegionList from './regions/RegionList';
 import RegionEdit from './regions/RegionEdit';
 import RegionView from './regions/RegionView';
+import RegionDelete from './regions/RegionDelete';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
@@ -73,6 +73,7 @@ class App extends Component {
               <Route path="/regions" exact component={RegionList} />
               <Route path="/regions/new" exact component={RegionCreate} />
               <Route path="/regions/edit/:_id" exact component={RegionEdit} />
+              <Route path="/regions/delete/:_id" exact component={RegionDelete} />
               <Route path="/regions/:_id" exact component={RegionView} />
             </Switch>
           </div>

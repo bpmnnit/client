@@ -94,12 +94,12 @@ class RegionList extends React.Component {
   }
 
   updatePage = (page, size) => {
-    console.log('PAGE: ' + page);
+    // console.log('PAGE: ' + page);
     this.props.fetchRegions(page, size);
   }
 
   updatePageSize = (page, size) => {
-    console.log('SIZE: ' + size);
+    // console.log('SIZE: ' + size);
     this.props.fetchRegions(page, size);
   }
 

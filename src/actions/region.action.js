@@ -4,7 +4,8 @@ import {
   CREATE_REGION,
   FETCH_REGIONS,
   FETCH_REGION,
-  EDIT_REGION
+  EDIT_REGION,
+  DELETE_REGION
 } from "./types";
 
 export const createRegion = formValues => async (dispatch, getState) => {
@@ -31,5 +32,12 @@ export const editRegion = (id, formValues) => async dispatch => {
   console.log(formValues);
   const response = await gs.patch(`/regions/edit/${id}`, formValues);
   dispatch({ type: EDIT_REGION, payload: response.data });
+  history.push('/regions');
+};
+
+export const deleteRegion = (id) => async dispatch => {
+  await gs.delete(`/regions/delete/${id}`);
+
+  dispatch({ type: DELETE_REGION, payload: id });
   history.push('/regions');
 };
