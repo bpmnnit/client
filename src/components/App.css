@@ -31,6 +31,11 @@
   margin: 0 auto;
 }
 
+.people-table-wrapper {
+  width: 98%;
+  margin: 0 auto;
+}
+
 .region-table-wrapper h3 {
   display: block;
 }

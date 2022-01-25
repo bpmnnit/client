@@ -12,7 +12,7 @@ class RegionList extends React.Component {
     direction: '',
     activeTh: null,
     page: 1,
-    size: 2,
+    size: 30,
   };
 
   componentDidMount() {
@@ -124,24 +124,26 @@ class RegionList extends React.Component {
             {this.renderList()}
           </tbody>
         </table>
-        <Paginate page={this.props.page} size={this.props.size} totalRegions={this.props.totalRegions} getPage={this.updatePage} setPageSize={this.updatePageSize}/>
+        <Paginate page={this.props.page} size={this.props.size} total={this.props.total} getPage={this.updatePage} setPageSize={this.updatePageSize}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log('Map state to props Regions');
+  console.log(state.regions);
   if (!state.auth.isLoggedIn) {
     history.push('/login');
     window.location.reload();
   }
   return {
-    regions: Object.values(_.omit(state.regions, ['page', 'size', 'totalRegions'])),
+    regions: Object.values(_.omit(state.regions, ['page', 'size', 'total'])),
     currentUserId: state.auth.user.id,
     isSignedIn: state.auth.isLoggedIn,
     page: state.regions.page,
     size: state.regions.size,
-    totalRegions: state.regions.totalRegions
+    total: state.regions.total
   };
 }
 

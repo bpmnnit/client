@@ -12,6 +12,12 @@ export const FETCH_REGION = 'FETCH_REGION';
 export const EDIT_REGION = 'EDIT_REGION';
 export const DELETE_REGION = 'DELETE_REGION';
 
+export const CREATE_PEOPLE = 'CREATE_PEOPLE';
+export const FETCH_PEOPLES = 'FETCH_PEOPLES';
+export const FETCH_PEOPLE = 'FETCH_PEOPLE';
+export const EDIT_PEOPLE = 'EDIT_PEOPLE';
+export const DELETE_PEOPLE = 'DELETE_PEOPLE';
+
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

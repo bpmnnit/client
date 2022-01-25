@@ -16,6 +16,7 @@ import RegionList from './regions/RegionList';
 import RegionEdit from './regions/RegionEdit';
 import RegionView from './regions/RegionView';
 import RegionDelete from './regions/RegionDelete';
+import PeopleList from './peoples/PeopleList';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
@@ -75,6 +76,7 @@ class App extends Component {
               <Route path="/regions/edit/:_id" exact component={RegionEdit} />
               <Route path="/regions/delete/:_id" exact component={RegionDelete} />
               <Route path="/regions/:_id" exact component={RegionView} />
+              <Route path="/peoples" exact component={PeopleList} />
             </Switch>
           </div>
         </div>
