@@ -156,8 +156,6 @@ class PeopleList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('Map state to props Peoples');
-  console.log(state.peoples);
   if (!state.auth.isLoggedIn) {
     history.push('/login');
     window.location.reload();
