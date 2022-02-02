@@ -101,7 +101,6 @@ class PeopleList extends React.Component {
   }
 
   filterTable = (e) => {
-    console.log(this.props.peoples);
     const filterStr = e.target.value.toLowerCase();
     if (filterStr && filterStr.trim()) {
       this.setState({

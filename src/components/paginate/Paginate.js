@@ -10,8 +10,6 @@ const Paginate = props => {
   const [start, setStart] = useState(0);
   const pageSize = 30;
   const parent = '/' + props.parent;
-  // const [pageSizeActiveItem, setPageSizeActiveItem] = useState(2);
-  // const pageSizes = [1, 2, 3];
 
   const handleClick = (e) => {
     props.getPage(+e.target.innerHTML, pageSize);
@@ -19,7 +17,7 @@ const Paginate = props => {
   };
 
   const handleLastPageClick = (e) => {
-    props.getPage(total / size, pageSize);
+    props.getPage(Math.ceil(total / size), pageSize);
     setActiveItem(+e.currentTarget.getAttribute('name'));
   };
 
@@ -29,34 +27,33 @@ const Paginate = props => {
   };
 
   const handleNextClick = (e) => { 
-    const pageNum = +e.currentTarget.getAttribute('name');
-    console.log('Next: ', pageNum);
-    if(pageNum < (parseInt(pageTabs.length / 10) * 10)) {
+    const pageNum = +e.currentTarget.getAttribute('name') + 10;
+    if(pageNum <= (parseInt(pageTabs.length / 10) * 10)) {
       props.getPage(pageNum + 1, pageSize);
       setStart(pageNum => pageNum + 10);
     }
-    setActiveItem(pageNum + 11);
+    setActiveItem(start + 11);
   }
 
   const handlePreviousClick = (e) => { 
-    const pageNum = +e.currentTarget.getAttribute('name');
-    console.log('Previous: ', pageNum);
-    if(pageNum > 0) {
+    const pageNum = +e.currentTarget.getAttribute('name') - 10;
+    if(pageNum >= 0) {
       props.getPage(pageNum + 1, pageSize);
       setStart(pageNum => pageNum - 10);  
     }
-    setActiveItem(pageNum - 11);
+    setActiveItem(start - 9);
   }
 
   return (
     <div className='ui right floated pagination menu'>
-      <Link className={activeItem === 0 ? 'active item' : 'item'} to={parent} onClick={handleFirstPageClick} name='0'>
+      <Link className={activeItem === -1 ? 'active item' : 'item'} to={parent} onClick={handleFirstPageClick} name='-1'>
         <i className='step backward icon'></i>
       </Link>
       {
-        <Link className={activeItem === -1 ? 'active item' : 'item'} to={parent} onClick={handlePreviousClick} name={start}>
+        start >= 10 ? 
+        <Link className={activeItem === start ? 'active item' : 'item'} to={parent} onClick={handlePreviousClick} name={start}>
           <i className='angle left icon'></i>
-        </Link>
+        </Link> : ''
       }
       {
         pageTabs.slice(start, start + 10).map(num => {
@@ -67,10 +64,13 @@ const Paginate = props => {
           );
         })
       }
-      <Link className={activeItem === -1 ? 'active item' : 'item'} to={parent} onClick={handleNextClick} name={start}>
-        <i className='angle right icon'></i>
-      </Link>
-      <Link className={activeItem === -1 ? 'active item' : 'item'} to={parent} onClick={handleLastPageClick} name='-1'>
+      {
+        start < (parseInt(pageTabs.length / 10) * 10) ?
+        <Link className={activeItem === start ? 'active item' : 'item'} to={parent} onClick={handleNextClick} name={start}>
+          <i className='angle right icon'></i>
+        </Link> : ''
+      }
+      <Link className={activeItem === -2 ? 'active item' : 'item'} to={parent} onClick={handleLastPageClick} name='-2'>
         <i className='step forward icon'></i>
       </Link>
     </div>
