@@ -52,7 +52,7 @@ const Paginate = props => {
       {
         start >= 10 ? 
         <Link className={activeItem === start ? 'active item' : 'item'} to={parent} onClick={handlePreviousClick} name={start}>
-          <i className='angle left icon'></i>
+          <i className='left chevron icon'></i>
         </Link> : ''
       }
       {
@@ -67,7 +67,7 @@ const Paginate = props => {
       {
         start < (parseInt(pageTabs.length / 10) * 10) ?
         <Link className={activeItem === start ? 'active item' : 'item'} to={parent} onClick={handleNextClick} name={start}>
-          <i className='angle right icon'></i>
+          <i className='right chevron icon'></i>
         </Link> : ''
       }
       <Link className={activeItem === -2 ? 'active item' : 'item'} to={parent} onClick={handleLastPageClick} name='-2'>

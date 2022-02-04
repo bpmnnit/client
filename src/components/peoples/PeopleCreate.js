@@ -5,8 +5,8 @@ import PeopleForm from './PeopleForm';
 
 class PeopleCreate extends React.Component {
   onSubmit = (formValues) => {
-    //this.props.createPeople(formValues);
-    console.log(formValues);
+    this.props.createPeople(formValues);
+    // console.log(formValues);
   }
 
   render() {

@@ -45,6 +45,13 @@
   display: none;
 }
 
+.ui.fixed.table th, 
+.ui.fixed.table td { 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} 
+
 /*.profile-img-card {
   width: 96px;
   height: 96px;
