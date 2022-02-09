@@ -5,6 +5,8 @@ import regionsReducer from './regionsReducer';
 import peoplesReducer from './peoplesReducer';
 import streamsReducer from './streamsReducer';
 import messageReducer from './messageReducer';
+import basinsReducer from './basinsReducer';
+import fpsReducer from './fpReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
   form: formReducer,
   streams: streamsReducer,
   regions: regionsReducer,
-  peoples: peoplesReducer
+  peoples: peoplesReducer,
+  basins: basinsReducer,
+  fps: fpsReducer
 });

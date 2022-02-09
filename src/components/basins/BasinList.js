@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import _ from 'lodash';
-import { fetchRegions } from '../../actions/region.action';
+import { fetchBasins } from '../../actions/basin.action';
 import history from '../../history';
 import Paginate from '../paginate/Paginate';
 
-class RegionList extends React.Component {
+class BasinList extends React.Component {
   state = {
     direction: '',
     activeTh: null,
@@ -16,19 +16,19 @@ class RegionList extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchRegions(this.state.page, this.state.size);
+    this.props.fetchBasins(this.state.page, this.state.size);
   }
 
-  renderAdmin(region) {
-    if (region.userId === this.props.currentUserId && region.userId !== null) {
+  renderAdmin(basin) {
+    if (basin.userId === this.props.currentUserId && basin.userId !== null) {
       return(
         <div className="right floated content">
-          <Link to={`/regions/edit/${region._id}`}>
+          <Link to={`/basins/edit/${basin._id}`}>
             <div className='ui icon tiny button primary' data-tooltip='Edit'>
               <i className='edit icon'></i>
             </div>
           </Link>
-          <Link to={`/regions/delete/${region._id}`}>
+          <Link to={`/basins/delete/${basin._id}`}>
             <div className='ui icon tiny button negative' data-tooltip='Delete'>
               <i className='trash icon'></i>
             </div>
@@ -39,24 +39,24 @@ class RegionList extends React.Component {
   }
 
   renderList() {
-    if (this.state.regions) {
-      return this.state.regions.map(region => {
+    if (this.state.basins) {
+      return this.state.basins.map(basin => {
         return (
-          <tr key={region._id}>
-            <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
-            <td>{region.description}</td>  
-            <td>{this.renderAdmin(region)}</td>  
+          <tr key={basin._id}>
+            <td><Link to={`/basins/${basin._id}`} className="header">{basin.name}</Link></td>
+            <td>{basin.category}</td>  
+            <td>{this.renderAdmin(basin)}</td>  
           </tr>
         );
       });  
     }
 
-    return this.props.regions.map(region => {
+    return this.props.basins.map(basin => {
       return (
-        <tr key={region._id}>
-          <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
-          <td>{region.description}</td>  
-          <td>{this.renderAdmin(region)}</td>  
+        <tr key={basin._id}>
+          <td><Link to={`/basins/${basin._id}`} className="header">{basin.name}</Link></td>
+          <td>{basin.category}</td>    
+          <td>{this.renderAdmin(basin)}</td>  
         </tr>
       );
     });
@@ -65,8 +65,8 @@ class RegionList extends React.Component {
   renderCreate() {
     if (this.props.isSignedIn) {
       return (
-        <Link to='/regions/new'>
-          <div className='ui right floated positive button' data-tooltip='New Region'>
+        <Link to='/basins/new'>
+          <div className='ui right floated positive button' data-tooltip='New Basin'>
             <i className='add icon' style={{margin: 'auto auto'}}></i>
           </div>
         </Link>
@@ -78,35 +78,38 @@ class RegionList extends React.Component {
     const colname = e.target.attributes.colname.value;
     this.setState({ activeTh: colname });
     if (this.state.direction === '' || this.state.direction === 'descending') {
-      this.props.regions.sort((a, b) => a[colname] > b[colname] ? 1: -1);
+      this.props.basins.sort((a, b) => a[colname] > b[colname] ? 1: -1);
       this.setState({ direction: 'ascending' });
     } else {
-      this.props.regions.sort((a, b) => a[colname] < b[colname] ? 1: -1);
+      this.props.basins.sort((a, b) => a[colname] < b[colname] ? 1: -1);
       this.setState({ direction: 'descending' });
     }
   }
 
   filterTable = (e) => {
     const filterStr = e.target.value.toLowerCase();
-    this.setState({
-      regions: this.props.regions.filter(el => { return el.title.toLowerCase().includes(filterStr) || el.description.toLowerCase().includes(filterStr)})
-    });
+    if (filterStr && filterStr.trim()) {
+      this.setState({
+        basins: this.props.basins.filter(el => { return el.name.toLowerCase().includes(filterStr) || el.category.toLowerCase().includes(filterStr)})
+      });
+    }
   }
 
   updatePage = (page, size) => {
     // console.log('PAGE: ' + page);
-    this.props.fetchRegions(page, size);
+    this.props.fetchBasins(page, size);
   }
 
   updatePageSize = (page, size) => {
+
     // console.log('SIZE: ' + size);
-    this.props.fetchRegions(page, size);
+    this.props.fetchBasins(page, size);
   }
 
   render() {
     return (
-      <div className='region-table-wrapper'>
-        <h3>Regions</h3>
+      <div className='basin-table-wrapper'>
+        <h3>Basins</h3>
         {this.renderCreate()}
         <div className='ui icon input'>
           <i className='search icon'></i>
@@ -115,8 +118,8 @@ class RegionList extends React.Component {
         <table className='ui single line selectable celled sortable table'>
           <thead>
             <tr>
-              <th className={ this.state.activeTh === 'title' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='title'>Title</th>
-              <th className={ this.state.activeTh === 'description' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='description'>Description</th>
+              <th className={ this.state.activeTh === 'name' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='name'>Name</th>
+              <th className={ this.state.activeTh === 'category' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='category'>Category</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -124,27 +127,25 @@ class RegionList extends React.Component {
             {this.renderList()}
           </tbody>
         </table>
-        <Paginate page={this.props.page} size={this.props.size} total={this.props.total} getPage={this.updatePage} setPageSize={this.updatePageSize}/>
+        <Paginate parent='basins' page={this.props.page} size={this.props.size} total={this.props.total} getPage={this.updatePage} setPageSize={this.updatePageSize}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log('Map state to props Regions');
-  console.log(state.regions);
   if (!state.auth.isLoggedIn) {
     history.push('/login');
     window.location.reload();
   }
   return {
-    regions: Object.values(_.omit(state.regions, ['page', 'size', 'total'])),
+    basins: Object.values(_.omit(state.basins, ['page', 'size', 'total'])),
     currentUserId: state.auth.user.id,
     isSignedIn: state.auth.isLoggedIn,
-    page: state.regions.page,
-    size: state.regions.size,
-    total: state.regions.total
+    page: state.basins.page,
+    size: state.basins.size,
+    total: state.basins.total
   };
 }
 
-export default connect(mapStateToProps, { fetchRegions })(RegionList);
+export default connect(mapStateToProps, { fetchBasins })(BasinList);

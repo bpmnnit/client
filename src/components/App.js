@@ -19,6 +19,14 @@ import RegionDelete from './regions/RegionDelete';
 import PeopleList from './peoples/PeopleList';
 import PeopleCreate from './peoples/PeopleCreate';
 import PeopleView from './peoples/PeopleView';
+import PeopleEdit from './peoples/PeopleEdit';
+import PeopleDelete from './peoples/PeopleDelete';
+import BasinList from './basins/BasinList';
+import BasinCreate from './basins/BasinCreate';
+import BasinView from './basins/BasinView';
+import BasinEdit from './basins/BasinEdit';
+import BasinDelete from './basins/BasinDelete';
+import FpList from './fps/FpList';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
@@ -81,6 +89,14 @@ class App extends Component {
               <Route path="/peoples" exact component={PeopleList} />
               <Route path="/peoples/new" exact component={PeopleCreate} />
               <Route path="/peoples/:_id" exact component={PeopleView} />
+              <Route path="/peoples/edit/:_id" exact component={PeopleEdit} />
+              <Route path="/peoples/delete/:_id" exact component={PeopleDelete} />
+              <Route path="/basins" exact component={BasinList} />
+              <Route path="/basins/new" exact component={BasinCreate} />
+              <Route path="/basins/:_id" exact component={BasinView} />
+              <Route path="/basins/edit/:_id" exact component={BasinEdit} />
+              <Route path="/basins/delete/:_id" exact component={BasinDelete} />
+              <Route path="/fps" exact component={FpList} />
             </Switch>
           </div>
         </div>

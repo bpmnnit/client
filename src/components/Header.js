@@ -19,8 +19,14 @@ const Header = (props) => {
         <Link to="/regions" name='regions' className={activeItem === 'regions' ? 'active item' : 'item'} onClick={handleItemClick}>
           Regions
         </Link>
+        <Link to="/basins" name='basins' className={activeItem === 'basins' ? 'active item' : 'item'} onClick={handleItemClick}>
+          Basins
+        </Link>
         <Link to="/peoples" name='peoples' className={activeItem === 'peoples' ? 'active item' : 'item'} onClick={handleItemClick}>
           Peoples
+        </Link>
+        <Link to="/fps" name='fps' className={activeItem === 'fps' ? 'active item' : 'item'} onClick={handleItemClick}>
+          FP
         </Link>
         <div className='right menu'>
           <Link to="/profile" name='profile' className={activeItem === 'profile' ? 'active item' : 'item'} onClick={handleItemClick}>

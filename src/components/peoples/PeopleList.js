@@ -129,7 +129,7 @@ class PeopleList extends React.Component {
           <i className='search icon'></i>
           <input type="text" placeholder="Search..." onChange={this.filterTable} />
         </div>
-        <table className='ui fixed single line celled sortable table'>
+        <table className='ui single line selectable celled sortable table'>
           <thead>
             <tr>
               <th className={ this.state.activeTh === 'cpf' ? `sorted ${this.state.direction}` : ''} onClick={this.sortTable} colname='cpf'>CPF</th>

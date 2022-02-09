@@ -1,33 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPeople } from '../../actions/people.action';
+import { fetchBasin } from '../../actions/basin.action';
 
-class PeopleView extends React.Component {
+class BasinView extends React.Component {
 
   componentDidMount() {
-    this.props.fetchPeople(this.props.match.params._id);
+    this.props.fetchBasin(this.props.match.params._id);
   }
 
   render(){
-    if (!this.props.people) {
+    if (!this.props.basin) {
       return <div>Loading...</div>;
     }
 
     console.log(this.props);
 
-    const { name, designation } = this.props.people;
+    const { name, category } = this.props.basin;
 
     return (
-      <div className='people-view-wrapper'>
+      <div className='basin-view-wrapper'>
         <div className='ui centered raised card'>
           <div className='content'>
             <div className='header'>{name}</div>
             <div className='description'>
-              {designation}
+              {category}
             </div>
           </div>
-          <Link className='ui bottom attached button' to={`/peoples/edit/${this.props.people._id}`}>
+          <Link className='ui bottom attached button' to={`/basins/edit/${this.props.basin._id}`}>
             <i className='add icon'></i>
             Update
           </Link>
@@ -38,7 +38,7 @@ class PeopleView extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { people: state.peoples[ownProps.match.params._id] };
+  return { basin: state.basins[ownProps.match.params._id] };
 }
 
-export default connect(mapStateToProps, { fetchPeople })(PeopleView);
+export default connect(mapStateToProps, { fetchBasin })(BasinView);

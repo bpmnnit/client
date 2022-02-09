@@ -10,8 +10,7 @@ import {
 
 export const createRegion = formValues => async (dispatch, getState) => {
   const userId = getState().auth.user.id;
-  const timeStamp = new Date();
-  const response = await gs.post('/regions/new', { ...formValues, userId, timeStamp });
+  const response = await gs.post('/regions/new', { ...formValues, userId });
 
   dispatch({ type: CREATE_REGION, payload: response.data });
   history.push('/regions');

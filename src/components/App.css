@@ -23,10 +23,15 @@
 }
 
 .region-table-wrapper,
+.basin-table-wrapper,
+.fp-table-wrapper,
 .region-create-wrapper,
 .people-create-wrapper,
+.basin-create-wrapper,
 .region-view-wrapper,
 .region-edit-wrapper,
+.people-edit-wrapper,
+.basin-edit-wrapper,
 .user-profile-wrapper {
   width: 50%;
   margin: 0 auto;
