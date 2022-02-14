@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "datatables.net": "^1.11.2",
     "datatables.net-dt": "^1.11.2",
+    "faker": "^6.6.6",
     "flv.js": "^1.6.1",
     "lodash": "^4.17.21",
     "mongodb": "^4.1.1",
