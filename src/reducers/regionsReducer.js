@@ -10,7 +10,7 @@ const regionsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_REGIONS:
       return { 
-        // ...state,
+        ...state,
         page: action.payload.page,
         size: action.payload.size,
         total: action.payload.total,
@@ -19,7 +19,7 @@ const regionsReducer = (state = {}, action) => {
     case CREATE_REGION:
       return { ...state, [action.payload._id]: action.payload };
     case FETCH_REGION:
-        return { ...state, [action.payload._id]: action.payload };
+      return { ...state, [action.payload.region._id]: action.payload.region };
     case EDIT_REGION:
       return { ...state, [action.payload._id]: action.payload };    
     default: 

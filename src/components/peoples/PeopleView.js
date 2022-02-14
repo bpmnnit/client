@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPeople } from '../../actions/people.action';
+import Loader from '../Loader';
+import history from '../../history';
 
 class PeopleView extends React.Component {
 
@@ -11,10 +13,8 @@ class PeopleView extends React.Component {
 
   render(){
     if (!this.props.people) {
-      return <div>Loading...</div>;
+      return <Loader />;
     }
-
-    console.log(this.props);
 
     const { name, designation } = this.props.people;
 
@@ -38,6 +38,10 @@ class PeopleView extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  if (!state.auth.isLoggedIn) {
+    history.push('/login');
+    window.location.reload();
+  }
   return { people: state.peoples[ownProps.match.params._id] };
 }
 

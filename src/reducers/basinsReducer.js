@@ -10,7 +10,7 @@ const basinsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_BASINS:
       return { 
-        // ...state,
+        ...state,
         page: action.payload.page,
         size: action.payload.size,
         total: action.payload.total,

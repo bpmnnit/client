@@ -10,7 +10,7 @@ const peoplesReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_PEOPLES:
       return { 
-        // ...state,
+        ...state,
         page: action.payload.page,
         size: action.payload.size,
         total: action.payload.total,
@@ -19,7 +19,7 @@ const peoplesReducer = (state = {}, action) => {
     case CREATE_PEOPLE:
       return { ...state, [action.payload._id]: action.payload };
     case FETCH_PEOPLE:
-        return { ...state, [action.payload._id]: action.payload };
+        return { ...state, [action.payload.people._id]: action.payload.people };
     case EDIT_PEOPLE:
       return { ...state, [action.payload._id]: action.payload };    
     default: 

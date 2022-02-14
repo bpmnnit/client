@@ -42,7 +42,7 @@ class PeopleList extends React.Component {
     if (this.state.peoples) {
       return this.state.peoples.map(people => {
         return (
-          <tr key={people._id}>
+          <tr key={people._id + people.name}>
             <td><Link to={`/peoples/${people._id}`} className="header">{people.cpf}</Link></td>
             <td>{people.name}</td>  
             <td>{people.email}</td>  
@@ -60,7 +60,7 @@ class PeopleList extends React.Component {
 
     return this.props.peoples.map(people => {
       return (
-        <tr key={people._id}>
+        <tr key={people._id + people.name}>
           <td><Link to={`/peoples/${people._id}`} className="header">{people.cpf}</Link></td>
           <td>{people.name}</td>  
           <td>{people.email}</td>  

@@ -6,7 +6,7 @@ import peoplesReducer from './peoplesReducer';
 import streamsReducer from './streamsReducer';
 import messageReducer from './messageReducer';
 import basinsReducer from './basinsReducer';
-import fpsReducer from './fpReducer';
+import fpsReducer from './fpsReducer';
 
 export default combineReducers({
   auth: authReducer,

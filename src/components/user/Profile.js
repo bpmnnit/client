@@ -15,7 +15,7 @@ class Profile extends Component {
       <div className="user-profile-wrapper">
         <div className='ui centered raised card'>
           <div className='image'>
-            <img src={'images/elliot.jpg'} alt='User Logo'/>
+            <img src='/elliot.jpg' alt='User Logo'/>
           </div>
           <div className='content'>
             <div className='header'>{currentUser.username}</div>

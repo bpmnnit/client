@@ -42,7 +42,7 @@ class RegionList extends React.Component {
     if (this.state.regions) {
       return this.state.regions.map(region => {
         return (
-          <tr key={region._id}>
+          <tr key={region._id + region.title}>
             <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
             <td>{region.description}</td>  
             <td>{this.renderAdmin(region)}</td>  
@@ -53,7 +53,7 @@ class RegionList extends React.Component {
 
     return this.props.regions.map(region => {
       return (
-        <tr key={region._id}>
+        <tr key={region._id + region.title}>
           <td><Link to={`/regions/${region._id}`} className="header">{region.title}</Link></td>
           <td>{region.description}</td>  
           <td>{this.renderAdmin(region)}</td>  
@@ -131,8 +131,6 @@ class RegionList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('Map state to props Regions');
-  console.log(state.regions);
   if (!state.auth.isLoggedIn) {
     history.push('/login');
     window.location.reload();

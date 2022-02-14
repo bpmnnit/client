@@ -42,7 +42,7 @@ class BasinList extends React.Component {
     if (this.state.basins) {
       return this.state.basins.map(basin => {
         return (
-          <tr key={basin._id}>
+          <tr key={basin._id + basin.name}>
             <td><Link to={`/basins/${basin._id}`} className="header">{basin.name}</Link></td>
             <td>{basin.category}</td>  
             <td>{this.renderAdmin(basin)}</td>  
@@ -53,7 +53,7 @@ class BasinList extends React.Component {
 
     return this.props.basins.map(basin => {
       return (
-        <tr key={basin._id}>
+        <tr key={basin._id + basin.name}>
           <td><Link to={`/basins/${basin._id}`} className="header">{basin.name}</Link></td>
           <td>{basin.category}</td>    
           <td>{this.renderAdmin(basin)}</td>  

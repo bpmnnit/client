@@ -57,6 +57,11 @@
   white-space: nowrap;
 } 
 
+.logo {
+  width: 12px;
+  padding: 0;
+}
+
 /*.profile-img-card {
   width: 96px;
   height: 96px;

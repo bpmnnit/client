@@ -38,7 +38,14 @@ class FpList extends React.Component {
     }
   }
 
+  pushRegionHistory = (e) => {
+    const region_id = e.target.attributes.region_id.value;
+    history.push(`/regions/${region_id}`);
+  }
+
   renderList() {
+
+    console.log(history);
     
     if (this.state.fps) {
       return this.state.fps.map(fp => {
@@ -49,7 +56,7 @@ class FpList extends React.Component {
             { console.log(fp.region) }
             <td>
               {
-                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header">{fp.region.title}</Link> : ''
+                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header" onClick={this.pushRegionHistory} region_id={fp.region._id}>{fp.region.title}</Link> : ''
               }
             </td>
             <td>
@@ -70,7 +77,7 @@ class FpList extends React.Component {
             <td>{fp.type}</td>
             <td>
               {
-                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header">{fp.region.title}</Link> : ''
+                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header" onClick={this.pushRegionHistory} region_id={fp.region._id}>{fp.region.title}</Link> : ''
               }
             </td>
             <td>

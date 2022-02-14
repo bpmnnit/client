@@ -42,7 +42,7 @@ const Header = (props) => {
     return (
       <div className='ui pointing menu'>
         <Link to="/" className="item">
-          <img src='images/logo.png' alt='Logo' />
+          <Logo />
         </Link>
         <div className='right menu'>
           <Link to="/login" name='login' className={activeItem === 'login' ? 'active item' : 'item'} onClick={handleItemClick}>
