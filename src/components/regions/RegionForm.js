@@ -32,7 +32,7 @@ class RegionForm extends React.Component {
       <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
         <Field name="title" component={this.renderInput} label="Region Title" />
         <Field name="description" component={this.renderInput} label="Region Description" />
-        <button className="ui button primary">Save</button>
+        <button className="ui button primary" type='submit'>Save</button>
       </form>
     );
   }

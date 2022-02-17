@@ -14,8 +14,6 @@ class BasinView extends React.Component {
       return <div>Loading...</div>;
     }
 
-    console.log(this.props);
-
     const { name, category } = this.props.basin;
 
     return (

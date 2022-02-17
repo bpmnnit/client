@@ -28,10 +28,12 @@
 .region-create-wrapper,
 .people-create-wrapper,
 .basin-create-wrapper,
+.fp-create-wrapper,
 .region-view-wrapper,
 .region-edit-wrapper,
 .people-edit-wrapper,
 .basin-edit-wrapper,
+.fp-edit-wrapper,
 .user-profile-wrapper {
   width: 50%;
   margin: 0 auto;

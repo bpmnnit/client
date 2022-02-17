@@ -10,7 +10,6 @@ class RegionView extends React.Component {
   }
 
   render(){
-    console.log(this.props);
     if (!this.props.region) {
       return <div>Loading...</div>;
     }

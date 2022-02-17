@@ -38,25 +38,18 @@ class FpList extends React.Component {
     }
   }
 
-  pushRegionHistory = (e) => {
-    const region_id = e.target.attributes.region_id.value;
-    history.push(`/regions/${region_id}`);
-  }
-
   renderList() {
 
-    console.log(history);
-    
     if (this.state.fps) {
       return this.state.fps.map(fp => {
         return (
-          <tr key={fp._id}>
+          <tr key={fp._id + fp.name}>
             <td><Link to={`/fps/${fp._id}`} className="header">{fp.name}</Link></td>
             <td>{fp.type}</td>
             { console.log(fp.region) }
             <td>
               {
-                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header" onClick={this.pushRegionHistory} region_id={fp.region._id}>{fp.region.title}</Link> : ''
+                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header">{fp.region.title}</Link> : ''
               }
             </td>
             <td>
@@ -72,12 +65,12 @@ class FpList extends React.Component {
 
     return this.props.fps.map(fp => {
       return (
-        <tr key={fp._id}>
+        <tr key={fp._id + fp.name}>
           <td><Link to={`/fps/${fp._id}`} className="header">{fp.name}</Link></td>
             <td>{fp.type}</td>
             <td>
               {
-                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header" onClick={this.pushRegionHistory} region_id={fp.region._id}>{fp.region.title}</Link> : ''
+                fp.region != null ? <Link to={`/regions/${fp.region._id}`} className="header" >{fp.region.title}</Link> : ''
               }
             </td>
             <td>
@@ -95,7 +88,7 @@ class FpList extends React.Component {
     if (this.props.isSignedIn) {
       return (
         <Link to='/fps/new'>
-          <div className='ui right floated positive button' data-tooltip='New Fp'>
+          <div className='ui right floated positive button' data-tooltip='New Field Party'>
             <i className='add icon' style={{margin: 'auto auto'}}></i>
           </div>
         </Link>
@@ -138,7 +131,7 @@ class FpList extends React.Component {
   render() {
     return (
       <div className='fp-table-wrapper'>
-        <h3>Fps</h3>
+        <h3>Field Parties</h3>
         {this.renderCreate()}
         <div className='ui icon input'>
           <i className='search icon'></i>

@@ -27,12 +27,17 @@ import BasinView from './basins/BasinView';
 import BasinEdit from './basins/BasinEdit';
 import BasinDelete from './basins/BasinDelete';
 import FpList from './fps/FpList';
+import FpView from './fps/FpView';
+import FpCreate from './fps/FpCreate';
+import FpEdit from './fps/FpEdit';
+import FpDelete from './fps/FpDelete';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
 
 import history from '../history';
 import Header from "./Header";
+
 
 class App extends Component {
   constructor(props) {
@@ -97,6 +102,10 @@ class App extends Component {
               <Route path="/basins/edit/:_id" exact component={BasinEdit} />
               <Route path="/basins/delete/:_id" exact component={BasinDelete} />
               <Route path="/fps" exact component={FpList} />
+              <Route path="/fps/new" exact component={FpCreate} />
+              <Route path="/fps/:_id" exact component={FpView} />
+              <Route path="/fps/edit/:_id" exact component={FpEdit} />
+              <Route path="/fps/delete/:_id" exact component={FpDelete} />
             </Switch>
           </div>
         </div>

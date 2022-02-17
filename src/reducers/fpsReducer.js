@@ -3,7 +3,7 @@ import {
   CREATE_FP,
   FETCH_FP,
   FETCH_FPS,
-  EDIT_FP
+  EDIT_FP,
 } from '../actions/types';
 
 const fpsReducer = (state = {}, action) => {
@@ -21,7 +21,7 @@ const fpsReducer = (state = {}, action) => {
     case FETCH_FP:
         return { ...state, [action.payload._id]: action.payload };
     case EDIT_FP:
-      return { ...state, [action.payload._id]: action.payload };    
+      return { ...state, [action.payload._id]: action.payload };
     default: 
       return state;
   }

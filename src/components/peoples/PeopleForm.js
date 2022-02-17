@@ -81,7 +81,7 @@ class PeopleForm extends React.Component {
             })
           }
         </Field>  
-        <button className='ui button primary'>Save</button>
+        <button className='ui button primary' type='submit'>Save</button>
       </form>
     );
   }

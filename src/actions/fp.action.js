@@ -5,7 +5,7 @@ import {
   FETCH_FPS,
   FETCH_FP,
   EDIT_FP,
-  DELETE_FP
+  DELETE_FP,
 } from "./types";
 
 export const createFp = formValues => async (dispatch, getState) => {
@@ -34,7 +34,6 @@ export const editFp = (id, formValues) => async dispatch => {
 
 export const deleteFp = (id) => async dispatch => {
   await gs.delete(`/fps/delete/${id}`);
-
   dispatch({ type: DELETE_FP, payload: id });
   history.push('/fps');
 };
