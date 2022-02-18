@@ -5,10 +5,14 @@ import gs from '../../apis/gs';
 class FpForm extends React.Component {
   constructor(props) {
     super(props);
+    const { initialValues } = props;
     this.state = {
       types: ['', 'DEPARTMENTAL', 'OUTSOURCED', 'VSP'],
       region: [{ _id: '', title: ''}],
-      chief: [{ _id: '', name: '', designation: '', discipline: ''}]
+      chief: [{ _id: '', name: '', designation: '', discipline: ''}],
+      selectedType: initialValues && initialValues.type ? initialValues.type : '',
+      selectedRegion: initialValues && initialValues.region ? initialValues.region._id : '',
+      selectedChief: initialValues && initialValues.chief ? initialValues.chief._id : ''
     };
   }
 
@@ -17,7 +21,7 @@ class FpForm extends React.Component {
       const response = await gs.get('/pr');
       this.setState({
         region: [...this.state.region, ...response.data.regs],
-        chief: [...this.state.chief, ...response.data.peops]
+        chief: [...this.state.chief, ...response.data.peops],
       });
     };
 
@@ -43,18 +47,46 @@ class FpForm extends React.Component {
     );
   }
 
+  setSelectedValue = (label) => {
+    switch(label.toLowerCase()) {
+      case 'type':
+        return this.state.selectedType;
+      case 'region':
+        return this.state.selectedRegion;
+      case 'chief':
+        return this.state.selectedChief;
+      default:
+        break;  
+    }
+  }
+
+  handleChange = (event, label) => {
+    switch(label.toLowerCase()) {
+      case 'type':
+        this.setState({ selectedType: event.target.value });
+        break;
+      case 'region':
+        this.setState({ selectedRegion: event.target.value });  
+        break;
+      case 'chief':
+        this.setState({ selectedChief: event.target.value });
+        break;
+      default:
+        break;  
+    }
+  }
+
   renderSelect = ({ input, label, type, meta, children }) => {
     const className=`field ${meta.error && meta.touched ? 'error': ''}`;
-    if (meta && meta.intial) {
-      input.value = meta.initial;
-    }
-    if (input.name === 'region' || input.name === 'chief') {
-      input.value = meta && meta.initial ? meta.initial._id: '';
-    }
     return (
       <div className={className}>
         <label>{label}</label>
-        <select {...input} className='ui search dropdown'>
+        <select 
+          {...input}
+          className='ui search dropdown'
+          onChange={(event) => {this.handleChange(event, label)}}
+          value={this.setSelectedValue(label)}
+        >
           {children}
         </select>
         {this.renderError(meta)}
@@ -81,17 +113,17 @@ class FpForm extends React.Component {
           {
             this.state.region ? this.state.region.map((element, index) => {
               return <option value={element._id} key={index}>{element.title}</option>
-            }):''
+            }): ''
           }
         </Field>
         <Field name='chief' type='select' component={this.renderSelect} label='Chief'>
           {
             this.state.chief ? this.state.chief.map((element, index) => {
               return <option value={element._id} key={index}>{`${element.name} (${element.designation}-${element.discipline})`}</option>
-            }):''
+            }): ''
           }
         </Field>
-        <button className='ui button primary' type='submit'>Save</button>
+        <button className='ui button primary' type='submit' disabled={this.props.submitting}>Save</button>
       </form>
     );
   }
