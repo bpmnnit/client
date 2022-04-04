@@ -28,6 +28,12 @@ const Header = (props) => {
         <Link to="/fps" name='fps' className={activeItem === 'fps' ? 'active item' : 'item'} onClick={handleItemClick}>
           FP
         </Link>
+        <Link to="/surveys" name='surveys' className={activeItem === 'surveys' ? 'active item' : 'item'} onClick={handleItemClick}>
+          Surveys
+        </Link>
+        <Link to="/dprs" name='dprs' className={activeItem === 'dprs' ? 'active item' : 'item'} onClick={handleItemClick}>
+          DPR
+        </Link>
         <div className='right menu'>
           <Link to="/profile" name='profile' className={activeItem === 'profile' ? 'active item' : 'item'} onClick={handleItemClick}>
             Profile

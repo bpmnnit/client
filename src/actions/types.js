@@ -30,6 +30,18 @@ export const FETCH_FP = 'FETCH_FP';
 export const EDIT_FP = 'EDIT_FP';
 export const DELETE_FP = 'DELETE_FP';
 
+export const CREATE_SURVEY = 'CREATE_SURVEY';
+export const FETCH_SURVEYS = 'FETCH_SURVEYS';
+export const FETCH_SURVEY = 'FETCH_SURVEY';
+export const EDIT_SURVEY = 'EDIT_SURVEY';
+export const DELETE_SURVEY = 'DELETE_SURVEY';
+
+export const CREATE_DPR = 'CREATE_DPR';
+export const FETCH_DPRS = 'FETCH_DPRS';
+export const FETCH_DPR = 'FETCH_DPR';
+export const EDIT_DPR = 'EDIT_DPR';
+export const DELETE_DPR = 'DELETE_DPR';
+
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";

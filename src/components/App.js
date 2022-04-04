@@ -31,6 +31,8 @@ import FpView from './fps/FpView';
 import FpCreate from './fps/FpCreate';
 import FpEdit from './fps/FpEdit';
 import FpDelete from './fps/FpDelete';
+import SurveyList from './surveys/SurveyList';
+import DprList from './dprs/DprList';
 
 import { logout } from "../actions/auth";
 import { clearMessage } from "../actions/message";
@@ -106,6 +108,8 @@ class App extends Component {
               <Route path="/fps/:_id" exact component={FpView} />
               <Route path="/fps/edit/:_id" exact component={FpEdit} />
               <Route path="/fps/delete/:_id" exact component={FpDelete} />
+              <Route path="/surveys" exact component={SurveyList} />
+              <Route path="/dprs" exact component={DprList} />
             </Switch>
           </div>
         </div>

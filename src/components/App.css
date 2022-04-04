@@ -39,7 +39,8 @@
   margin: 0 auto;
 }
 
-.people-table-wrapper {
+.people-table-wrapper,
+.survey-table-wrapper {
   width: 98%;
   margin: 0 auto;
 }

@@ -26,8 +26,9 @@ export const fetchFp = (id) => async dispatch => {
   dispatch({ type: FETCH_FP, payload: response.data });
 };
 
-export const editFp = (id, formValues) => async dispatch => {
-  const response = await gs.patch(`/fps/edit/${id}`, formValues);
+export const editFp = (id, formValues) => async (dispatch, getState) => {
+  const userId = getState().auth.user.id;
+  const response = await gs.patch(`/fps/edit/${id}`, { ...formValues, userId });
   dispatch({ type: EDIT_FP, payload: response.data });
   history.push('/fps');
 };
